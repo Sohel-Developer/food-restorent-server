@@ -53,7 +53,6 @@ async function run() {
 
         app.delete('/food/:id', async (req, res) => {
             const id = req.params.id;
-            console.log(id);
             const query = { _id: new ObjectId(id) };
             const result = await foodCollection.deleteOne(query);
             res.send(result);
@@ -71,7 +70,7 @@ async function run() {
 
         app.post('/users', async (req, res) => {
             const user = req.body;
-            const query = { email: user.email }
+            const query = { Email: user.Email }
             const existingUser = await usersCollection.findOne(query);
 
             if (existingUser) {
