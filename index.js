@@ -38,6 +38,11 @@ async function run() {
             const result = await foodCollection.find().toArray()
             res.send(result)
         })
+        app.post('/food', async (req, res) => {
+            const food = req.body;
+            const result = await foodCollection.insertOne(food);
+            res.send(result)
+        })
 
 
         /* Users Saved */
