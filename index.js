@@ -40,7 +40,6 @@ async function run() {
         })
         app.get('/food/:id', async (req, res) => {
             const foodId = req.params.id
-            console.log(foodId);
             const query = { _id: new ObjectId(foodId) }
             const result = await foodCollection.findOne(query);
             // const result = await foodCollection.find().toArray()
@@ -50,6 +49,14 @@ async function run() {
             const food = req.body;
             const result = await foodCollection.insertOne(food);
             res.send(result)
+        })
+
+        app.delete('/food/:id', async (req, res) => {
+            const id = req.params.id;
+            console.log(id);
+            const query = { _id: new ObjectId(id) };
+            const result = await foodCollection.deleteOne(query);
+            res.send(result);
         })
 
 
