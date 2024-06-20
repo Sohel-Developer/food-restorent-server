@@ -81,6 +81,26 @@ async function run() {
             res.send(result);
         });
 
+        app.put('/user/:id', async (req, res) => {
+
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) };
+            const options = { upsert: true };
+            // Specify the update to set a value for the plot field
+            const updateDoc = {
+                $set: {
+                    role: "admin"
+                },
+            };
+            // Update the first document that matches the filter
+            const result = await usersCollection.updateOne(query, updateDoc, options);
+
+            console.log(result);
+
+            // const result = await usersCollection.insertOne(user);
+            res.send(result);
+        });
+
         app.delete('/user/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: new ObjectId(id) };
