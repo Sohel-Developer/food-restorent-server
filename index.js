@@ -115,7 +115,12 @@ async function run() {
         })
 
 
-        // Review Post Method
+        // Review  Method
+
+        app.get('/review', async (req, res) => {
+            const result = await reviewCollection.find().toArray()
+            res.send(result)
+        })
 
         app.post('/review', async (req, res) => {
             const reviews = req.body;
