@@ -51,6 +51,7 @@ async function run() {
         const foodCollection = client.db("FoodRestorent").collection("foods");
         const usersCollection = client.db("FoodRestorent").collection("users");
         const cartCollection = client.db("FoodRestorent").collection("carts");
+        const reviewCollection = client.db("FoodRestorent").collection("reviews");
 
         app.post('/jwt', (req, res) => {
             const user = req.body;
@@ -114,6 +115,13 @@ async function run() {
         })
 
 
+        // Review Post Method
+
+        app.post('/review', async (req, res) => {
+            const reviews = req.body;
+            const result = await reviewCollection.insertOne(reviews);
+            res.send(result)
+        })
 
         /* Users Saved */
 
